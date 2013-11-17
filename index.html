@@ -2,11 +2,20 @@
 <head>
 </head>
 <body>
+<script type="text/x-handlebars" id="users">
+<ul class="users-listing">
+  {{#each user in controller}}
+    <li>{{user.name}}</li>
+  {{else}}
+    <li>no users… :-(</li>
+  {{/each}}
+</ul>
+</script>
 <script type="text/x-handlebars" id="application">
-  <div class="main">
-    <h1>Hello World</h1>
-    {{outlet}}
-  </div>
+<div class="main">
+  <h1>Hello World</h1>
+  {{outlet}}
+</div>
 </script>
 <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
 <script src="http://builds.emberjs.com/handlebars-1.0.0.js"></script>
