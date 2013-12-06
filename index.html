@@ -2,21 +2,68 @@
 <head>
 </head>
 <body>
+
+<script type="text/x-handlebars" id="index">
+{{#link-to "users"}} Go to the users page {{/link-to}}
+</script>
+
+<script type="text/x-handlebars" id="user/edit">
+<div class="user-edit">
+  <label>Choose user avatar</label>
+  {{input value=avatarUrl}}
+  <label>User Name</label>
+  {{input value=name}}
+  <label>User Email</label>
+  {{input value=email}}
+  <label>User Short Bio</label>
+  {{textarea value=bio}}
+  <button {{action "save"}}> OK </button>
+</div>
+</script>
+
+<script type="text/x-handlebars" id="user">
+<button {{action "delete"}}>Delete</button>
+{{#if deleteMode}}
+<div class="confirm-box">
+  <h4>Really?</h4>
+  <button {{action "confirmDelete"}}> Yes </button>
+  <button {{action "cancelDelete"}}> No </button>
+</div>
+{{/if}}
+<div class="user-profile">
+  <button {{action "edit"}}>Edit</button>
+  <img {{bind-attr src="avatarUrl"}} alt="User's avatar" />
+  <h2>{{name}}</h2>
+  <span>{{email}}</span>
+  <p>{{bio}}</p>
+  <span>Created {{creationDate}}</span>
+</div>
+{{outlet}}
+</script>
+
 <script type="text/x-handlebars" id="users">
+<div>Users: {{usersCount}}</div>
 <ul class="users-listing">
   {{#each user in controller}}
-    <li>{{user.name}}</li>
+    <li>
+      {{#link-to "user" user}}
+        {{user.name}}
+      {{/link-to}}
+    </li>
   {{else}}
-    <li>no users… :-(</li>
+    <li>no users.. :-(</li>
   {{/each}}
 </ul>
+{{outlet}}
 </script>
+
 <script type="text/x-handlebars" id="application">
 <div class="main">
   <h1>Hello World</h1>
   {{outlet}}
 </div>
 </script>
+
 <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
 <script src="http://builds.emberjs.com/handlebars-1.0.0.js"></script>
 <script src="http://builds.emberjs.com/tags/v1.1.2/ember.js"></script>
