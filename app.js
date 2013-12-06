@@ -79,3 +79,21 @@ App.UserEditRoute = Ember.Route.extend({
     return this.modelFor('user');
   }
 });
+App.UsersCreateRoute = Ember.Route.extend({
+  model: function(){
+    return Em.Object.create({});
+  },
+  renderTemplate: function(){
+    this.render('user.edit', { controller: 'usersCreate' });
+  }
+});
+App.UsersCreateController = Ember.ObjectController.extend({
+  actions: {
+    save: function(){
+      this.get('model').set('creationDate', new Date());
+      var newUser = this.store.createRecord('user', this.get('model'));
+      newUser.save();
+      this.transitionToRoute('user', newUser);
+    }
+  }
+});
