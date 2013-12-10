@@ -46,7 +46,7 @@
 {{#link-to "users.create" class="create-btn"}} Add User {{/link-to}}
 <div>Users: {{usersCount}}</div>
 <ul class="users-listing">
-  {{#each user in controller}}
+  {{#each user in userList}}
     <li>
       {{#link-to "user" user}}
         {{user.name}}

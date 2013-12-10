@@ -41,17 +41,30 @@ App.UsersController = Em.ArrayController.extend({
   sortProperties: ['name'],
   sortAscending: true, // false = descending
   filteredUser: '',
+  userList: function(){ return this.get('model').filterBy('selected',true);}.property('@each.selected'),
+  // userList: function() {
+  //   return this.get('model').filterBy('selected',true);
+  // },
   filterUser: function(){
     filteredUser = this.get('filteredUser').toLowerCase();
+    users = this.get('model')
     // if show.get('show.title').toLowerCase().indexOf(filteredShow) >= 0
     // console.log(this.get('model'));
-    this.get('model').forEach(function(user){
-      // console.log(user.get('name'));
-      if (user.get('name').toLowerCase().indexOf(filteredUser) >= 0) {
-        console.log(user.get('name'));
-      } else {
-      }
-    });
+    if (Em.isEmpty(filteredUser)) {
+      users.forEach(function(user){
+        user.set('selected',false);
+      });
+    } else {
+      users.forEach(function(user){
+        // console.log(user.get('name'));
+        if (user.get('name').toLowerCase().indexOf(filteredUser) >= 0) {
+          console.log(user.get('name'));
+          user.set('selected',true);
+        } else {
+          user.set('selected',false);
+        }
+      });
+    }
   }.observes('filteredUser'),
 
   usersCount: function(){
