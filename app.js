@@ -40,6 +40,19 @@ App.UsersRoute = Em.Route.extend({
 App.UsersController = Em.ArrayController.extend({
   sortProperties: ['name'],
   sortAscending: true, // false = descending
+  filteredUser: '',
+  filterUser: function(){
+    filteredUser = this.get('filteredUser').toLowerCase();
+    // if show.get('show.title').toLowerCase().indexOf(filteredShow) >= 0
+    // console.log(this.get('model'));
+    this.get('model').forEach(function(user){
+      // console.log(user.get('name'));
+      if (user.get('name').toLowerCase().indexOf(filteredUser) >= 0) {
+        console.log(user.get('name'));
+      } else {
+      }
+    });
+  }.observes('filteredUser'),
 
   usersCount: function(){
     return this.get('model.length');

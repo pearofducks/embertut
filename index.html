@@ -42,6 +42,7 @@
 </script>
 
 <script type="text/x-handlebars" id="users">
+{{input value=filteredUser id='search' class='form_search' placeholder='search...' }}
 {{#link-to "users.create" class="create-btn"}} Add User {{/link-to}}
 <div>Users: {{usersCount}}</div>
 <ul class="users-listing">
